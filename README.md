@@ -1,0 +1,6 @@
+- Built API automation framework using Playwright
+- Implemented Service Layer architecture
+- Integrated JSON schema validation using AJV
+- Implemented test data generator with Faker
+- Integrated Jenkins CI/CD pipeline
+- Generated Playwright HTML and JUnit reports
