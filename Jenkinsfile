@@ -25,7 +25,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/Long075/CI_CD_Demo'
+                    url: 'https://github.com/Long075/CRM_Project.git'
             }
         }
 
