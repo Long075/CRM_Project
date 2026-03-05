@@ -1,12 +1,16 @@
 # CRM API Test Automation Framework
 
 ## Overview
+
 This project is an **API Automation Testing Framework** built using **Playwright with JavaScript**.
 It is designed to automate testing for CRM APIs and is integrated with a **Jenkins CI/CD pipeline** to enable continuous automated test execution.
 
 The project demonstrates how to build a **maintainable API testing structure**, separate API logic using service classes, and execute tests automatically through CI/CD.
 
+---
+
 # Tech Stack
+
 * JavaScript (Node.js)
 * Playwright
 * REST API Testing
@@ -14,7 +18,10 @@ The project demonstrates how to build a **maintainable API testing structure**, 
 * Git & GitHub
 * dotenv (Environment configuration)
 
+---
+
 # Project Structure
+
 ```
 CRM_Project
 │
@@ -23,10 +30,9 @@ CRM_Project
 ├── services/             # API request handling (Service layer)
 │   └── auth.service.js
 │   └── user.service.js
-│
 ├── utils/                # Utility functions
 │
-├── .env                 # Environment configuration
+├── .env                  # Environment configuration
 │
 ├── playwright.config.js  # Playwright configuration
 │
@@ -37,7 +43,10 @@ CRM_Project
 └── README.md
 ```
 
+---
+
 # Features
+
 * Automated **API testing using Playwright**
 * **Reusable service classes** for API request handling
 * **Bearer Token authentication**
@@ -46,39 +55,72 @@ CRM_Project
 * Test report generation with **Playwright HTML Report**
 * Version control using **GitHub**
 
+---
+
 # Installation
+
 Clone the repository:
-    git clone https://github.com/Long075/CRM_Project.git
+
+```
+git clone https://github.com/Long075/CRM_Project.git
+```
 
 Move into the project folder:
-    cd CRM_Project
+
+```
+cd CRM_Project
+```
 
 Install dependencies:
-    npm install
+
+```
+npm install
+```
+
+---
 
 # Environment Configuration
+
 Create a `.env` file in the project root:
+
+```
 BASE_URL=your_api_url
 API_USERNAME=your_username
 API_PASSWORD=your_password
+```
 
 This allows the framework to run tests against different environments.
+
+---
 
 # Running Tests
 
 Run all tests:
-    npx playwright test
+
+```
+npx playwright test
+```
 
 Run tests with report:
-    npx playwright test --reporter=html
+
+```
+npx playwright test --reporter=html
+```
 
 Open the test report:
-    npx playwright show-report
+
+```
+npx playwright show-report
+```
+
+---
 
 # Jenkins CI/CD Integration
+
 This project is integrated with **Jenkins Pipeline**.
 
 The pipeline performs the following steps:
+
 1. Checkout source code from GitHub
 2. Install Node.js dependencies
 3. Execute Playwright tests
@@ -86,6 +128,7 @@ The pipeline performs the following steps:
 
 Example Jenkins pipeline flow:
 
+```
 Checkout Code
      ↓
 Install Dependencies
@@ -93,8 +136,12 @@ Install Dependencies
 Run Playwright Tests
      ↓
 Generate Test Report
+```
+
+---
 
 # Example API Service
+
 Example reusable API request service:
 
 ```javascript
@@ -105,23 +152,35 @@ async createUser(dataUser, token) {
     });
 }
 ```
+
 This structure helps separate **test logic** from **API request handling**, making the framework easier to maintain.
 
+---
+
 # Test Report
+
 After test execution, Playwright generates an HTML report showing:
+
 * Test results
 * Execution time
 * Passed / Failed tests
 * Error logs
 
+---
+
 # Author
-Luu Hoang Long
+
+Long Hoang
 
 GitHub:
 https://github.com/Long075
 
+---
+
 # Purpose of This Project
+
 This project was built to practice and demonstrate:
+
 * API automation testing
 * Playwright automation framework design
 * CI/CD pipeline integration with Jenkins
