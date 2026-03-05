@@ -15,6 +15,7 @@ The project demonstrates how to build a **maintainable API testing structure**, 
 * dotenv (Environment configuration)
 
 # Project Structure
+```
 CRM_Project
 │
 ├── tests/                # Test cases
@@ -25,7 +26,7 @@ CRM_Project
 │
 ├── utils/                # Utility functions
 │
-├── .env/                 # Environment configuration
+├── .env                 # Environment configuration
 │
 ├── playwright.config.js  # Playwright configuration
 │
@@ -34,6 +35,7 @@ CRM_Project
 ├── package.json          # Project dependencies
 │
 └── README.md
+```
 
 # Features
 * Automated **API testing using Playwright**
