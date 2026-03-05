@@ -17,6 +17,8 @@ pipeline {
         BASE_URL = credentials('BASE_URL')
         API_USERNAME = credentials('API_USERNAME')
         API_PASSWORD = credentials('API_PASSWORD')
+        API_WRONG_USERNAME=credentials('API_WRONG_USERNAME')
+        API_WRONG_PASSWORD=credentials('API_WRONG_PASSWORD')
     }
 
     stages {
