@@ -35,9 +35,34 @@ pipeline {
             }
         }
 
-        stage('Run Tests in Docker') {
-            steps {
-                bat 'docker run playwright-tests'
+        stage('Run Tests Parallel') {
+            parallel {
+                stage('Chromium Tests') {
+                    steps {
+                        bat """
+                        docker run --rm ^
+                        -v %cd%:/app ^
+                        -e BASE_URL=%BASE_URL% ^
+                        -e API_USERNAME=%API_USERNAME% ^
+                        -e API_PASSWORD=%API_PASSWORD% ^
+                        playwright-tests npx playwright test --project=chromium
+                        """
+                    }
+                }
+
+                stage('Firefox Tests') {
+                    steps {
+                        bat """
+                        docker run --rm ^
+                        -v %cd%:/app ^
+                        -e BASE_URL=%BASE_URL% ^
+                        -e API_USERNAME=%API_USERNAME% ^
+                        -e API_PASSWORD=%API_PASSWORD% ^
+                        playwright-tests npx playwright test --project=firefox
+                        """
+                    }
+                }
+
             }
         }
 
