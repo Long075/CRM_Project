@@ -1,5 +1,5 @@
 import {test, expect} from '@playwright/test';
-import {AuthService} from '../../serivces/auth.service.js';
+import {AuthService} from '../../../serivces/auth.service.js';
 
 test('Login Success', async({request}) => {
     const authService = new AuthService(request);

@@ -29,33 +29,45 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Build Docker Image') {
             steps {
-                bat 'npm ci'
-                bat 'npx playwright install'
+                bat 'docker build -t playwright-tests .'
             }
         }
 
-        stage('Run Tests') {
+        stage('Run Tests in Docker') {
             steps {
-                bat 'npm run test:ci'
+                bat 'docker run playwright-tests'
             }
         }
 
-        stage('Run Parallel'){
-            parallel{
-                stage('Chrome') {
-                    steps {
-                        bat 'npx playwright test --project=chromium'
-                    }
-                }
-                stage('Firefox') {
-                    steps {
-                        bat 'npx playwright test --project=firefox'
-                    }
-                }
-            }
-        }     
+        // stage('Install Dependencies') {
+        //     steps {
+        //         bat 'npm ci'
+        //         bat 'npx playwright install'
+        //     }
+        // }
+        //
+        // stage('Run Tests') {
+        //     steps {
+        //         bat 'npm run test:ci'
+        //     }
+        // }
+
+        // stage('Run Parallel'){
+        //     parallel{
+        //         stage('Chrome') {
+        //             steps {
+        //                 bat 'npx playwright test --project=chromium'
+        //             }
+        //         }
+        //         stage('Firefox') {
+        //             steps {
+        //                 bat 'npx playwright test --project=firefox'
+        //             }
+        //         }
+        //     }
+        // }     
     }
 
     post {

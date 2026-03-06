@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
 import {UserService} from '../../serivces/user.service.js';
-import {dataCreate, dataUpdate, dataInvalid} from '../../utils/data.helper.js';
+import {dataCreate, dataUpdate, dataInvalid} from '../../utils/user.helper.js';
 import fs from 'fs';
 
 import {getSchema, updateSchema} from '../../schema/user_schema.js';
