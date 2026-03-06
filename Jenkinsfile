@@ -42,7 +42,7 @@ pipeline {
                 -e BASE_URL=%BASE_URL% ^
                 -e API_USERNAME=%API_USERNAME% ^
                 -e API_PASSWORD=%API_PASSWORD% ^
-                -v %cd%/playwright-report:/app/playwright-report ^
+                -v %cd%/playwright-report-chromium:/app/playwright-report ^
                 playwright-tests npx playwright test --project=chromium
                 """
             }
@@ -55,7 +55,7 @@ pipeline {
                 -e BASE_URL=%BASE_URL% ^
                 -e API_USERNAME=%API_USERNAME% ^
                 -e API_PASSWORD=%API_PASSWORD% ^
-                -v %cd%/playwright-report:/app/playwright-report ^
+                -v %cd%/playwright-report-firefox:/app/playwright-report ^
                 playwright-tests npx playwright test --project=firefox
                 """
             }
