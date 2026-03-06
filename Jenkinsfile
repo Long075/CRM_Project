@@ -41,10 +41,10 @@ pipeline {
                     steps {
                         bat """
                         docker run --rm ^
-                        -v %cd%:/app ^
                         -e BASE_URL=%BASE_URL% ^
                         -e API_USERNAME=%API_USERNAME% ^
                         -e API_PASSWORD=%API_PASSWORD% ^
+                        -v %cd%/playwright-report:/app/playwright-report ^
                         playwright-tests npx playwright test --project=chromium
                         """
                     }
@@ -54,10 +54,10 @@ pipeline {
                     steps {
                         bat """
                         docker run --rm ^
-                        -v %cd%:/app ^
                         -e BASE_URL=%BASE_URL% ^
                         -e API_USERNAME=%API_USERNAME% ^
                         -e API_PASSWORD=%API_PASSWORD% ^
+                        -v %cd%/playwright-report:/app/playwright-report ^
                         playwright-tests npx playwright test --project=firefox
                         """
                     }
