@@ -35,34 +35,29 @@ pipeline {
             }
         }
 
-        stage('Run Tests Parallel') {
-            parallel {
-                stage('Chromium Tests') {
-                    steps {
-                        bat """
-                        docker run --rm ^
-                        -e BASE_URL=%BASE_URL% ^
-                        -e API_USERNAME=%API_USERNAME% ^
-                        -e API_PASSWORD=%API_PASSWORD% ^
-                        -v %cd%/playwright-report:/app/playwright-report ^
-                        playwright-tests npx playwright test --project=chromium
-                        """
-                    }
-                }
+        stage('Chromium Tests') {
+            steps {
+                bat """
+                docker run --rm ^
+                -e BASE_URL=%BASE_URL% ^
+                -e API_USERNAME=%API_USERNAME% ^
+                -e API_PASSWORD=%API_PASSWORD% ^
+                -v %cd%/playwright-report:/app/playwright-report ^
+                playwright-tests npx playwright test --project=chromium
+                """
+            }
+        }
 
-                stage('Firefox Tests') {
-                    steps {
-                        bat """
-                        docker run --rm ^
-                        -e BASE_URL=%BASE_URL% ^
-                        -e API_USERNAME=%API_USERNAME% ^
-                        -e API_PASSWORD=%API_PASSWORD% ^
-                        -v %cd%/playwright-report:/app/playwright-report ^
-                        playwright-tests npx playwright test --project=firefox
-                        """
-                    }
-                }
-
+        stage('Firefox Tests') {
+            steps {
+                bat """
+                docker run --rm ^
+                -e BASE_URL=%BASE_URL% ^
+                -e API_USERNAME=%API_USERNAME% ^
+                -e API_PASSWORD=%API_PASSWORD% ^
+                -v %cd%/playwright-report:/app/playwright-report ^
+                playwright-tests npx playwright test --project=firefox
+                """
             }
         }
 
@@ -99,9 +94,18 @@ pipeline {
         always {
             publishHTML([
                 allowMissing: false,
-                reportDir: 'playwright-report',
+                reportDir: 'playwright-report-chromium',
                 reportFiles: 'index.html',
-                reportName: 'Playwright Report',
+                reportName: 'Chromium Report',
+                keepAll: true,
+                alwaysLinkToLastBuild: true
+            ])
+
+            publishHTML([
+                allowMissing: false,
+                reportDir: 'playwright-report-firefox',
+                reportFiles: 'index.html',
+                reportName: 'Firefox Report',
                 keepAll: true,
                 alwaysLinkToLastBuild: true
             ])

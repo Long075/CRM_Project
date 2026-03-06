@@ -36,7 +36,7 @@ test('Get 1 User Success', async({request}) => {
     await userService.deleteUser(idUser,token);
 })
 
-test.only('Get All User', async ({request}) => {
+test('Get All User', async ({request}) => {
     const userService = new UserService(request);
     const validateGetSchema = ajv.compile(getSchema);
 
