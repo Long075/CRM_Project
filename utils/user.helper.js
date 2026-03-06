@@ -84,3 +84,14 @@ export function dataInvalid(){
       }
     },
 ]}
+
+//Do API không trả về id user nên cần hàm để lấy id user
+export async function getIDByUsername(userService, username, token){
+    const getUser = await userService.getUsers(token);
+    const body2 = await getUser.json();
+    const User = (body2.data.users).find(u => u.username === username);
+    if (!User) {
+        throw new Error(`❌ Không tìm thấy user: ${username}`);
+    }
+    return User.id;
+}

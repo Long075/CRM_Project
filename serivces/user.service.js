@@ -10,27 +10,27 @@ export class UserService{
         })
     }
 
-    getUser(id, token){
-        return this.request.get(`/api/users/${id}`, {
+    async getUser(id, token){
+        return await this.request.get(`/api/users/${id}`, {
             headers: {Authorization: `Bearer ${token}`}
         })
     }
 
-    getUsers(token){
-        return this.request.get(`/api/users/`, {
+    async getUsers(token){
+        return await this.request.get(`/api/users/`, {
             headers: {Authorization: `Bearer ${token}`}
         })
     }
 
-    updateUser(dataUser, id, token){
-        return this.request.put(`/api/users/${id}`, {
+    async updateUser(dataUser, id, token){
+        return await this.request.put(`/api/users/${id}`, {
             headers: {Authorization: `Bearer ${token}`},
             data: dataUser
         })
     }
 
-    deleteUser(id, token){
-        return this.request.delete(`/api/users/${id}`, {
+    async deleteUser(id, token){
+        return await this.request.delete(`/api/users/${id}`, {
             headers: {Authorization: `Bearer ${token}`},
         })
     }
