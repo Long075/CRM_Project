@@ -1,51 +1,56 @@
 import {test, expect} from '@playwright/test';
-import {LoginPage} from "../../../pages/login.page";
+import {LoginPage} from "../../../pages/login.page.js";
+
+const nonExistEmail = 'long@gmail.vn';
+const InvalidEmail = 'long';
+
+//Không sử dụng storageState
+test.use({ storageState: {cookies: [], origins: []} });
 
 test('Reset Password Valid', async ({ page }) => {
     const loginPage = new LoginPage(page);
-    await page.goto('https://hvtester.pos365.vn/Signin');
+    await loginPage.gotoLoginPage();
     await loginPage.openForgotPassword();
-    await page.pause();
+    await page.pause(); // Dừng để click Captcha
     await loginPage.forgotPassword(process.env.EMAIL);
-    await expect(page.getByText('Mật khẩu mới đã được gửi về địa chỉ email bạn cung cấp')).toBeVisible();
+    await loginPage.sendPassToEmail();
 });
 
 test('Reset Password Fail With Not Click Captcha', async ({ page }) => {
     const loginPage = new LoginPage(page);
-    await page.goto('https://hvtester.pos365.vn/Signin');
+    await loginPage.gotoLoginPage();
     await loginPage.openForgotPassword();
     await loginPage.forgotPassword(process.env.EMAIL);
-    await expect(page.locator('#p_errmsg')).toContainText('Mã xác nhận không hợp lệ');
+    await loginPage.verifyError('Mã xác nhận không hợp lệ');
 });
 
 test('Reset Password Fail With Non-exist Email', async ({ page }) => {
     const loginPage = new LoginPage(page);
-    await page.goto('https://hvtester.pos365.vn/Signin');
+    await loginPage.gotoLoginPage();
     await loginPage.openForgotPassword();
-    await loginPage.forgotPassword('long@gmail.vn');
-    await expect(page.locator('#p_errmsg')).toContainText('Địa chỉ email không hợp lệ');
+    await loginPage.forgotPassword(nonExistEmail);
+    await loginPage.verifyError('Địa chỉ email không hợp lệ');
 });
 
 test('Reset Password Fail With Invalid Email', async ({ page }) => {
     const loginPage = new LoginPage(page);
-    await page.goto('https://hvtester.pos365.vn/Signin');
+    await loginPage.gotoLoginPage();
     await loginPage.openForgotPassword();
-    await loginPage.forgotPassword('long');
-    await expect(page.locator('#p_errmsg')).toContainText('Địa chỉ email không hợp lệ');
+    await loginPage.forgotPassword(InvalidEmail);
+    await loginPage.verifyError('Địa chỉ email không hợp lệ');
 });
 
 test('Reset Password Fail With Empty Email', async ({ page }) => {
     const loginPage = new LoginPage(page);
-    await page.goto('https://hvtester.pos365.vn/Signin');
+    await loginPage.gotoLoginPage();
     await loginPage.openForgotPassword();
     await loginPage.forgotPassword('');
-    await expect(page.locator('#p_errmsg')).toContainText('Bạn phải nhập địa chỉ Email');
+    await loginPage.verifyError('Bạn phải nhập địa chỉ Email');
 });
 
-test('Back to login', async ({ page }) => {
+test('Back To Login', async ({ page }) => {
     const loginPage = new LoginPage(page);
-    await page.goto('https://hvtester.pos365.vn/Signin');
+    await loginPage.gotoLoginPage();
     await loginPage.openForgotPassword();
-    await page.getByText('Quay lại Đăng nhập').click();
-    await expect(page).not.toHaveURL(/RequestPassword/);
+    await loginPage.backToLogin();
 });
