@@ -11,8 +11,8 @@ test('Create Supplier Success', async ({ page }) => {
     await supplierPage.goToSupplierMenu();
     await supplierPage.checkSupplierPage();
     await supplierPage.addSupplierMenu();
-
     await supplierPage.createSupplierForm(validSupplier);
+    await supplierPage.checkToastMessageSuccess();
 });
 
 for(const data of invalidSuppliers){
@@ -24,5 +24,6 @@ for(const data of invalidSuppliers){
         await supplierPage.checkSupplierPage();
         await supplierPage.addSupplierMenu();
         await supplierPage.createSupplierForm(data);
+        await supplierPage.checkToastMessageError();
     });
 }

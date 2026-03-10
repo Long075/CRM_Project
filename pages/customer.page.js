@@ -1,23 +1,23 @@
 import { expect } from "playwright/test";
 
-export class SupplierPage{
+export class CustomerPage{
     constructor(page){
         this.page = page;
         
-        this.dropdownSupplier = page.locator("//a[contains(@class,'dropdown-toggle') and contains(.,'Đối tác')]");
-        this.supplierMenu = page.locator("//a[@ng-href='/#!/Suppliers']");
-        this.addSupplierBtn = page.locator("//button[@ng-click='addNewButton()']");
-        this.saveSupplierBtn = page.locator("//button[@ng-click='save()']");
-        this.returnSupplierMenuBtn = page.locator("//button[@ng-click='backwardButton()']");
+        this.dropdownCustomer = page.locator("//a[contains(@class,'dropdown-toggle') and contains(.,'Đối tác')]");
+        this.customerMenu = page.locator("//a[@ng-href='/#!/Customers']");
+        this.addCustomerBtn = page.locator("//button[@ng-click='addNewButton()']");
+        this.saveCustomerBtn = page.locator("//button[@ng-click='save()']");
+        this.returnCustomerMenuBtn = page.locator("//button[@ng-click='backwardButton()']");
 
         this.title = page.locator("#left-filter");
         this.supTitle = page.locator("h1[ng-bind='$root.title']");
         this.fields = [
-            page.locator("th[data-title='Mã nhà cung cấp']"),
+            page.locator("th[data-title='Mã khách hàng']"),
             page.locator("th[data-title='Tên']"),
             page.locator("th[data-title='Điện thoại']"),
-            page.locator("th[data-title='MST']"),
             page.locator("th[data-title='Tổng giao dịch']"),
+            page.locator("th[data-title='Điểm thưởng']"),
             page.locator("th[data-title='Dư nợ']")
         ];
         this.addBtn = page.getByRole('button', {name: /Thêm mới/})
@@ -28,6 +28,7 @@ export class SupplierPage{
         this.nameInput = page.locator("input[ng-model='partner.Name']");
         this.debtInput = page.locator("input[ng-model='bl.Debt']");
         this.phoneInput = page.locator("input[ng-model='partner.Phone']");
+        this.pointInput = page.locator("input[ng-model='partner.Point']")
         this.emailInput = page.locator("input[ng-model='partner.Email']");
 
         this.toastMessSucess = page.locator(".k-notification-wrap span[title='success']");
@@ -46,32 +47,32 @@ export class SupplierPage{
         this.tableData = page.locator("[role='treegrid']");
     }
 
-    async addSupplierMenu(){
-        await this.addSupplierBtn.click();
+    async addCustomerMenu(){
+        await this.addCustomerBtn.click();
         await expect(this.supTitle).toHaveText(/Thêm mới/);
     }
 
-    async updateSupplierMenu(page, data){
+    async updateCustomerMenu(page, data){
         await page.locator('tr.k-master-row', {hasText: data}).click();
         await this.updateBtn.click();
         await expect(this.supTitle).toHaveText(/Cập nhật/);
     }
 
-    async deleteSupplier(page, data){
+    async deleteCustomer(page, data){
         await page.locator('tr.k-master-row', {hasText: data}).click();
         await this.deleteBtn.click();
         await expect(this.confirmDelete).toBeVisible();
         await this.successDelete.click();
     }
 
-    async searchSupplier(data){
+    async searchCustomer(data){
         await this.searchByName.fill(data);
         await this.searchByMonth.selectOption({ label: 'Tháng 1' });
         await this.searchByName.press('Enter');
     }
 
-    async checkSupplierPage(){
-        await expect(this.title).toHaveText("Nhà cung cấp");
+    async checkCustomerPage(){
+        await expect(this.title).toHaveText("Khách hàng");
         for(const field of this.fields){
             await expect(field).toBeVisible();
         }
@@ -80,12 +81,12 @@ export class SupplierPage{
         await expect(this.importBtn).toBeVisible();
     }
 
-    async goToSupplierMenu(){
-        await this.dropdownSupplier.click();
-        await this.supplierMenu.click();
+    async goToCustomerMenu(){
+        await this.dropdownCustomer.click();
+        await this.customerMenu.click();
     }
 
-    async createSupplierForm(data){
+    async createCustomerForm(data){
         if(data.identify)
             await this.identifyInput.fill(data.identify);
         if(data.name)
@@ -96,7 +97,9 @@ export class SupplierPage{
             await this.emailInput.fill(data.email);
         if(data.debt)
             await this.debtInput.fill(data.debt);
-        await this.saveSupplierBtn.click();
+        if(data.point)
+            await this.pointInput.fill(data.point);
+        await this.saveCustomerBtn.click();
     }
 
     async checkToastMessageSuccess(){
