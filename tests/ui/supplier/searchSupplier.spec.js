@@ -14,17 +14,17 @@ test.beforeEach(async ({ page }) => {
 
 });
 
-test('Search Supplier Success With ID', async ({ page }) => {
+test('@smoke Search Supplier Success With ID', async ({ page }) => {
     await supplierPage.searchSupplier(process.env.ID_SUPPLIER_SEARCH);
     await supplierPage.checkExistData(process.env.ID_SUPPLIER_SEARCH);
 });
 
-test('Search Supplier Success With Name', async ({ page }) => {
+test('@smoke Search Supplier Success With Name', async ({ page }) => {
     await supplierPage.searchSupplier(process.env.NAME_SUPPLIER_SEARCH);
     await supplierPage.checkExistData(process.env.NAME_SUPPLIER_SEARCH);
 });
 
-test('Search Supplier Success With Phone', async ({ page }) => {
+test('@smoke Search Supplier Success With Phone', async ({ page }) => {
     await supplierPage.searchSupplier(process.env.PHONE_SUPPLIER_SEARCH);
     await supplierPage.checkExistData(process.env.PHONE_SUPPLIER_SEARCH);
 });

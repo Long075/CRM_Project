@@ -3,7 +3,7 @@ import {LoginPage} from "../../../pages/login.page";
 import { CustomerPage } from '../../../pages/customer.page';
 import { validCustomer, invalidCustomers } from '../../../utils/customer.helper';
 
-test('Create Customer Success', async ({ page }) => {
+test('@smoke Create Customer Success', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const customerPage = new CustomerPage(page);
 

@@ -3,7 +3,7 @@ import {LoginPage} from "../../../pages/login.page";
 import { SupplierPage } from '../../../pages/supplier.page';
 import { validSupplier, invalidSuppliers } from '../../../utils/supplier.helper';
 
-test('Create Supplier Success', async ({ page }) => {
+test('@smoke Create Supplier Success', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const supplierPage = new SupplierPage(page);
 

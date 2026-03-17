@@ -14,17 +14,17 @@ test.beforeEach(async ({ page }) => {
 
 });
 
-test('Search Customer Success With ID', async ({ page }) => {
+test('@smoke Search Customer Success With ID', async ({ page }) => {
     await customerPage.searchCustomer(process.env.ID_CUSTOMER_SEARCH);
     await customerPage.checkExistData(process.env.ID_CUSTOMER_SEARCH);
 });
 
-test('Search Customer Success With Name', async ({ page }) => {
+test('@smoke Search Customer Success With Name', async ({ page }) => {
     await customerPage.searchCustomer(process.env.NAME_CUSTOMER_SEARCH);
     await customerPage.checkExistData(process.env.NAME_CUSTOMER_SEARCH);
 });
 
-test('Search Customer Success With Phone', async ({ page }) => {
+test('@smoke Customer Success With Phone', async ({ page }) => {
     await customerPage.searchCustomer(process.env.PHONE_CUSTOMER_SEARCH);
     await customerPage.checkExistData(process.env.PHONE_CUSTOMER_SEARCH);
 });
