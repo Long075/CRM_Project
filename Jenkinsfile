@@ -53,7 +53,7 @@ pipeline {
                     docker run --rm ^
                     --env-file .env ^
                     -v %cd%/playwright-report-chromium:/app/playwright-report ^
-                    playwright-tests npx playwright test --grep "@smoke" --project=chromium
+                    playwright-tests npx playwright test tests/ui/ --grep "@smoke" --project=chromium
                     """
                 }
             }
@@ -85,7 +85,7 @@ pipeline {
                 --env-file .env ^
                 -e BASE_URL=%TARGET_URL% ^
                 -v %cd%/playwright-report-post-deploy:/app/playwright-report ^
-                playwright-tests npx playwright test --grep "@smoke" --project=chromium
+                playwright-tests npx playwright test tests/ui/ --grep "@smoke" --project=chromium
                 """
             }
         }
